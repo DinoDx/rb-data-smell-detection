@@ -121,6 +121,9 @@
                                     <thead class="thead-light">
                                        <tr>
                                           <th scope="col">
+                                             Attribute
+                                          </th>
+                                          <th scope="col">
                                              Data Smell Type
                                           </th>
                                           <th scope="col">
@@ -137,6 +140,9 @@
                                     {% for smell in value%}
                                     <tbody class="list">
                                        <tr>
+                                          <td class="type">
+                                             {{ column }}
+                                          </td>
                                           <td class="type">
                                              {{ smell.data_smell_type.value }}
                                           </td>

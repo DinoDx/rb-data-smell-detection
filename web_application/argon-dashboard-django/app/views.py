@@ -117,9 +117,9 @@ def upload(request):
                 if parameters is not None:
                     for p,v in parameters.items():
                         if v["max"] != "inf":
-                            par = Parameter(name=p, value=presettings_smells["tolerant"][s.value][p], belonging_smell=smell, belonging_file=file1, min_value=v["min"], max_value=v["max"])
+                            par = Parameter(name=p, value=presettings_smells["strict"][s.value][p], belonging_smell=smell, belonging_file=file1, min_value=v["min"], max_value=v["max"])
                         else: 
-                            par = Parameter(name=p, value=presettings_smells["tolerant"][s.value][p], belonging_smell=smell, belonging_file=file1, min_value=v["min"], max_value=-1)
+                            par = Parameter(name=p, value=presettings_smells["strict"][s.value][p], belonging_smell=smell, belonging_file=file1, min_value=v["min"], max_value=-1)
                         par.save()
 
             # Save columns to database
@@ -239,7 +239,7 @@ def customize(request):
             context['presetting'] = 'tolerant'
 
         elif 'medium' in request.POST:
-            context['presetting'] = 'medium'
+            context['presetting'] = 'medium'    
         
         elif 'strict' in request.POST:
             context['presetting'] = 'strict'
@@ -353,6 +353,7 @@ def result(request):
         context['column_names'] = column_names
         context['results'] = sorted_results
         context['file'] = file1.file_name
+        context = json.dumps(context)
 
         # Delete file and detection result if button submit
         if request.method == 'POST':
